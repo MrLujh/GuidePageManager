@@ -15,5 +15,5 @@
 
 @interface GuidePageManager : NSObject
 
-+ (void)shareManagerWithDelegate:(id<GuidePageDelegate>)delegate imageArray:(NSArray *)imageArray startBtnFrame:(CGRect)startBtnFrame;
++ (void)shareManagerWithDelegate:(id<GuidePageDelegate>)delegate imageArray:(NSArray *)imageArray startBtnFrame:(CGRect)startBtnFrame isShowBtnBackgroundColor:(BOOL)isShowBtnBackgroundColor;
 @end

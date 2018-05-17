@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 s.name        = 'GuidePageManager'
-s.version     = '0.0.1'
+s.version     = '0.0.2'
 s.authors     = { 'Mrlujh' => '287929070@qq.com' }
 s.homepage    = 'https://github.com/MrLujh/GuidePageManager'
 s.summary     = 'a dropdown menu for ios like wechat homepage.'

@@ -17,6 +17,8 @@
 @property (nonatomic, strong) UIImage *image;
 /** 体验按钮frame */
 @property (nonatomic,assign) CGRect startBtnFrame;
+/** 是否显示体验背景颜色 */
+@property (nonatomic,assign) BOOL isShowBtnBackgroundColor;
 // 判断是否是最后一页
 - (void)setIndexPath:(NSIndexPath *)indexPath count:(NSUInteger)count;
 @end

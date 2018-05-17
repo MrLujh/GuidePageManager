@@ -58,6 +58,22 @@
     self.experienceBtn.frame = startBtnFrame;
 }
 
+#pragma mark -isShowBtnBackgroundColor set
+
+- (void)setIsShowBtnBackgroundColor:(BOOL)isShowBtnBackgroundColor
+{
+    _isShowBtnBackgroundColor = isShowBtnBackgroundColor;
+    
+    if (isShowBtnBackgroundColor) {
+       
+        self.experienceBtn.backgroundColor = [UIColor blackColor];
+        self.experienceBtn.alpha = 0.3;
+    }else {
+        
+        self.experienceBtn.backgroundColor = [UIColor clearColor];
+    }
+}
+
 #pragma mark -判断当前cell是否是最后一页
 
 - (void)setIndexPath:(NSIndexPath *)indexPath count:(NSUInteger)count

@@ -13,11 +13,12 @@
 
 static NSString * const reuseIdentifier = @"Cell";
 
-- (instancetype)initWithImageArray:(NSArray *)imageArray startBtnFrame:(CGRect)startBtnFrame
+- (instancetype)initWithImageArray:(NSArray *)imageArray startBtnFrame:(CGRect)startBtnFrame isShowBtnBackgroundColor:(BOOL)isShowBtnBackgroundColor
 {
     
-    _imageArray = imageArray;
-    _startBtnFrame = startBtnFrame;
+    self.imageArray = imageArray;
+    self.startBtnFrame = startBtnFrame;
+    self.isShowBtnBackgroundColor = isShowBtnBackgroundColor;
     return  [self init];
 }
 
@@ -71,10 +72,11 @@ static NSString * const reuseIdentifier = @"Cell";
     
     GuidePageCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    NSString *imageName = [_imageArray objectAtIndex:indexPath.row];
+    NSString *imageName = [self.imageArray objectAtIndex:indexPath.row];
     cell.image = [UIImage imageNamed:imageName];
-    cell.startBtnFrame = _startBtnFrame;
-    [cell setIndexPath:indexPath count:[_imageArray count]];
+    cell.startBtnFrame = self.startBtnFrame;
+    cell.isShowBtnBackgroundColor = self.isShowBtnBackgroundColor;
+    [cell setIndexPath:indexPath count:[self.imageArray count]];
     
     return cell;    
 }

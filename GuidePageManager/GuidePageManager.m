@@ -17,25 +17,27 @@
     NSMutableArray *_picStrArr;
     UIWindow *_window;
     CGRect _startBtnFrame;
+    BOOL _isShowBtnBackgroundColor;
 }
 
 @end
 @implementation GuidePageManager
 
-+ (void)shareManagerWithDelegate:(id<GuidePageDelegate>)delegate imageArray:(NSArray *)imageArray startBtnFrame:(CGRect)startBtnFrame {
++ (void)shareManagerWithDelegate:(id<GuidePageDelegate>)delegate imageArray:(NSArray *)imageArray startBtnFrame:(CGRect)startBtnFrame isShowBtnBackgroundColor:(BOOL)isShowBtnBackgroundColor{
     static GuidePageManager *instance = nil;
     static dispatch_once_t oneToken;
     dispatch_once(&oneToken,^{
         instance = [[GuidePageManager alloc] init];
-        [instance getDelegate:delegate picStrArr:imageArray startBtnFrame:startBtnFrame];
+        [instance getDelegate:delegate picStrArr:imageArray startBtnFrame:startBtnFrame isShowBtnBackgroundColor:isShowBtnBackgroundColor];
         [instance setupNewFeature];
     });
 }
 
-- (void)getDelegate:(id<GuidePageDelegate>)delegate picStrArr:(NSArray *)picStrArr startBtnFrame:(CGRect)startBtnFrame{
+- (void)getDelegate:(id<GuidePageDelegate>)delegate picStrArr:(NSArray *)picStrArr startBtnFrame:(CGRect)startBtnFrame isShowBtnBackgroundColor:(BOOL)isShowBtnBackgroundColor{
     _delegate = delegate;
     _picStrArr = [NSMutableArray arrayWithArray:picStrArr];
     _startBtnFrame = startBtnFrame;
+    _isShowBtnBackgroundColor = isShowBtnBackgroundColor;
 }
 
 - (void)setupNewFeature {
@@ -49,7 +51,7 @@
         }
     }
     if (_picStrArr.count == 0) return;
-    GuidePageViewController *fearure = [[GuidePageViewController alloc] initWithImageArray:_picStrArr startBtnFrame:_startBtnFrame];
+    GuidePageViewController *fearure = [[GuidePageViewController alloc] initWithImageArray:_picStrArr startBtnFrame:_startBtnFrame isShowBtnBackgroundColor:_isShowBtnBackgroundColor];
     fearure.view.backgroundColor = [UIColor clearColor];
     
     // 捕获ZJNewFeatureCell的start方法

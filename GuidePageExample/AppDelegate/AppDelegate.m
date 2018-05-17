@@ -63,7 +63,7 @@
         ret = CGRectMake((KUIScreenWidth -140*kScaleW)/2.0, KUIScreenHeight -110*kScaleH, 140*kScaleW, 50);
     }
     
-    [GuidePageManager shareManagerWithDelegate:self imageArray:imageArray startBtnFrame:ret];
+    [GuidePageManager shareManagerWithDelegate:self imageArray:imageArray startBtnFrame:ret isShowBtnBackgroundColor:NO];
 }
 
 #pragma mark -显示小红点 
