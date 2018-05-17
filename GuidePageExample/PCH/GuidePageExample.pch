@@ -1,0 +1,18 @@
+//
+//  GuidePageExample.pch
+//  GuidePageExample
+//
+//  Created by 卢家浩 on 2017/4/17.
+//  Copyright © 2017年 lujh. All rights reserved.
+//
+
+#ifndef GuidePageExample_pch
+#define GuidePageExample_pch
+
+#import "UIView+TBFrame.h"
+#import "UIFactory.h"
+#import "UIButton+SSEdgeInsets.h"
+#import "AppStyle.h"
+#import "UITabBar+TBBadge.h"
+
+#endif /* GuidePageExample_pch */
