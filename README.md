@@ -146,41 +146,6 @@ rm ~/Library/Caches/CocoaPods/search_index.json
     
     [GuidePageManager shareManagerWithDelegate:self imageArray:imageArray startBtnFrame:ret isShowBtnBackgroundColor:NO];
 }
-```
-
-* 路由&带参数
-
-    * 由ViewController向TestViewController跳转，在ViewController中将通过路由找到TestViewController，
-    传入的参数赋值给目标控制器，在TestViewController中只需声明一下入参接收对应的key
-```objc       
-@implementation UIViewController (routerManager)
-
-- (id)createVC:(NSDictionary *)dict{
-    
-    Class class = getClassFromAtcion(_cmd);
-    if (class) {
-        
-        UIViewController *doc = self;
-        doc = [[class alloc]init];
-        doc = [doc mj_setKeyValues:dict];
-        return doc;
-    }
-    return nil;
-}
-@end
-```
-
-```objc       
-UIViewController *doc = [[RouterManager sharedInstance]
-                             performAction:@"TestViewController"
-                             params:@{
-                                      @"info":@{
-                                              @"user":@"我是正向传值参数:push",
-                                              }
-                                      }
-                             shouldCacheTarget:NO];
-
-[self.navigationController pushViewController:doc animated:YES];
 ```    
 
 ![Mou icon](https://github.com/MrLujh/Fastlane--Packaging/blob/master/111.gif)
