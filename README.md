@@ -20,36 +20,7 @@ rm ~/Library/Caches/CocoaPods/search_index.json
 
 * 有两种思路
 
-    * 通过版本号来判断是否第一次安装,来改变窗口的根控制器,代码如下:  
-    
-```objc       
-// 获取当前的版本号
-    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
-    
-    // 获取上一次的版本号
-    NSString *lastVersion = [[NSUserDefaults standardUserDefaults] objectForKey:THVersionKey];
-    
-    if ([lastVersion floatValue] > 0) {
-        
-        [[UIApplication sharedApplication] setStatusBarHidden:NO];
-        
-        // 没有最新的版本号 创建tabBarVc
-        TLTabBarViewController *tabBarVC = [[TLTabBarViewController alloc]init];
-        self.tabBarVC = tabBarVC;
-        [self showUnreadMessageHotView];
-        self.window.rootViewController = tabBarVC;
-        
-    }else {
-        
-      
-        TLGuidePageVC *vc = [[TLGuidePageVC alloc] init];
-
-        self.window.rootViewController = vc;
-
-        [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:THVersionKey];
-        
-    }
-```    
+    * 通过版本号来判断是否第一次安装,来改变窗口的根控制器,代码如下:     
     
 * 各维度解耦
 
