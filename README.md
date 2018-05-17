@@ -89,17 +89,63 @@ rm ~/Library/Caches/CocoaPods/search_index.json
 
 ## 使用    
 
-* 路由&无参数
+* pod 导入 GuidePageManager;
 
-    * 由ViewController向TestViewController跳转，在ViewController中将通过路由找到TestViewController
+* 引入头文件 #import "GuidePageManager.h"
+
+* AppDelegate 遵守协议 <GuidePageDelegate>
     
 ```objc       
-UIViewController *doc = [[RouterManager sharedInstance]
-                             performAction:@"TestViewController"
-                             params:nil
-                             shouldCacheTarget:NO];
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-[self.navigationController pushViewController:doc animated:YES];
+    
+    [self selectRootController];
+    
+    // 显示小红点
+    [self showUnreadMessageHotView];
+
+    [self.window makeKeyAndVisible];
+    
+    return YES;
+}
+
+#pragma mark -设置根控制器
+
+- (void)selectRootController
+{
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    self.tabbar = [[TBTabBarController alloc] init];
+    
+    self.window.rootViewController = self.tabbar;
+    
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    
+    // 添加引导页
+    NSArray *imageArray = [[NSArray alloc] init];
+    if (BottomSafty == 0) {
+        
+        imageArray = @[@"guide_page_image_0",@"guide_page_image_1", @"guide_page_image_2", @"guide_page_image_3", @"guide_page_image_4"];
+    }else {
+        
+        imageArray = @[@"guide_page_image_iphoex_0",@"guide_page_image_iphoex_1", @"guide_page_image_iphoex_2", @"guide_page_image_iphoex_3"];
+    }
+    
+    // 体验 按钮
+    CGRect ret;
+    if (BottomSafty == 0) {
+        
+        ret = CGRectMake((KUIScreenWidth -140*kScaleW)/2.0, KUIScreenHeight -60*kScaleH, 140*kScaleW, 50);
+    }else {
+        
+        ret = CGRectMake((KUIScreenWidth -140*kScaleW)/2.0, KUIScreenHeight -110*kScaleH, 140*kScaleW, 50);
+    }
+    
+    [GuidePageManager shareManagerWithDelegate:self imageArray:imageArray startBtnFrame:ret isShowBtnBackgroundColor:NO];
+}
 ```
 
 * 路由&带参数
@@ -136,40 +182,6 @@ UIViewController *doc = [[RouterManager sharedInstance]
 
 [self.navigationController pushViewController:doc animated:YES];
 ```    
-
-* 路由&带参数&回调反向传值
-
-    * 在ViewController和TestViewController中同时声明一个blcok,在demo中有详细说明
-```objc       
-- (IBAction)popBtnClick:(UIButton *)sender
-{
-    
-    self.backblock(@"我是返回值参数:pop");
-    
-    [self.navigationController popViewControllerAnimated:YES];
-}
-```
-
-```objc       
-__weak typeof(self) weakSelf = self;
-self.backWithDict = ^(NSString *str) {
-        
-        weakSelf.backLabel.text = str;
-};
-    
-UIViewController *doc = [[RouterManager sharedInstance]
-                             performAction:@"TestViewController"
-                             params:@{
-                                      @"info":@{
-                                              @"user":@"我是正向传值参数:push",
-                                              },
-                                      @"backblock":self.backWithDict
-                                      }
-                             shouldCacheTarget:NO];
-
-[self.navigationController pushViewController:doc animated:YES];
-```    
-
 
 ![Mou icon](https://github.com/MrLujh/Fastlane--Packaging/blob/master/111.gif)
 
