@@ -79,11 +79,11 @@ rm ~/Library/Caches/CocoaPods/search_index.json
 
 * 如果是采用AppDelegate中使用ViewController方式实现.那就需要用到切换rootViewController。 
 
-    * 利用代理或者block将rootViewController切换回TLTabBarViewController;
+    *  利用代理或者block将rootViewController切换回TLTabBarViewController;
     
-    * 利用这种方式有弊端，即：用户第一次安装的时候，如果没有走完引导页面，现在窗口的跟控制器还是引导页的控制，项目中所有的控制器都还没有创建，这时候进入后台，收到平台发送的通知，点击通知用户是无法跳转到对应的界面;
+    *  利用这种方式有弊端，即：用户第一次安装的时候，如果没有走完引导页面，现在窗口的跟控制器还是引导页的控制，项目中所有的控制器都还没有创建，这时候进入后台，收到平台发送的通知，点击通知用户是无法跳转到对应的界面;
     
-    * 这种情况其实很少出现，项目最好不要通过修改window的根控制器来做引导页。
+    *  这种情况其实很少出现，项目最好不要通过修改window的根控制器来做引导页。
     
 * 通过创建一个新的Window，然后把引导页的控制设置为新Window的根控制器，降低了代码的耦合性，引导页功能独立。
 
