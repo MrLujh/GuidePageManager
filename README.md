@@ -49,10 +49,32 @@ rm ~/Library/Caches/CocoaPods/search_index.json
     }
 ``` 
 
-* 完善工具集
+* 在AppDelegate中，创建一个新的Window，把引导页的控制器设为新window的根控制器,代码如下:
 
-    * 模式演进的过程中，解耦的过程中，就会衍生出很多的工具。在进化过程里我们也会去思考，哪些工作是需要工具化的，主动去开发工具。一个完善的工具集，会极大提升团队的生产力，可以说是最有价值的部分。    
-
+```objc       
+ // 添加引导页
+    NSArray *imageArray = [[NSArray alloc] init];
+    if (BottomSafty == 0) {
+        
+        imageArray = @[@"guide_page_image_0",@"guide_page_image_1", @"guide_page_image_2", @"guide_page_image_3", @"guide_page_image_4"];
+    }else {
+        
+        imageArray = @[@"guide_page_image_iphoex_0",@"guide_page_image_iphoex_1", @"guide_page_image_iphoex_2", @"guide_page_image_iphoex_3"];
+    }
+    
+    // 体验 按钮
+    CGRect ret;
+    if (BottomSafty == 0) {
+        
+        ret = CGRectMake((KUIScreenWidth -140*kScaleW)/2.0, KUIScreenHeight -60*kScaleH, 140*kScaleW, 50);
+    }else {
+        
+        ret = CGRectMake((KUIScreenWidth -140*kScaleW)/2.0, KUIScreenHeight -110*kScaleH, 140*kScaleW, 50);
+    }
+    
+    [GuidePageManager shareManagerWithDelegate:self imageArray:imageArray startBtnFrame:ret isShowBtnBackgroundColor:NO];
+```
+     
 ## 开发模式升级
 
 * 模块化
