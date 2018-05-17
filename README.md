@@ -20,7 +20,8 @@ rm ~/Library/Caches/CocoaPods/search_index.json
 
 * 有两种思路
 
-    * 通过版本号来判断是否第一次安装,来改变窗口的根控制器,代码如下:    
+    * 通过版本号来判断是否第一次安装,来改变窗口的根控制器,代码如下:  
+    
 ```objc       
 // 获取当前的版本号
     NSString *currentVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
