@@ -26,6 +26,35 @@ rm ~/Library/Caches/CocoaPods/search_index.json
 
     * 工程大了以后，要分拆，不管是组件化还是插件化，还是什么，解耦是第一步，而且是各个维度的解耦。
     
+```objc       
+// 获取当前的版本号
+    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
+    
+    // 获取上一次的版本号
+    NSString *lastVersion = [[NSUserDefaults standardUserDefaults] objectForKey:THVersionKey];
+    
+    if ([lastVersion floatValue] > 0) {
+        
+        [[UIApplication sharedApplication] setStatusBarHidden:NO];
+        
+        // 没有最新的版本号 创建tabBarVc
+        TLTabBarViewController *tabBarVC = [[TLTabBarViewController alloc]init];
+        self.tabBarVC = tabBarVC;
+        [self showUnreadMessageHotView];
+        self.window.rootViewController = tabBarVC;
+        
+    }else {
+        
+      
+        TLGuidePageVC *vc = [[TLGuidePageVC alloc] init];
+
+        self.window.rootViewController = vc;
+
+        [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:THVersionKey];
+        
+    }
+``` 
+    
 * 完善工具集
 
     * 模式演进的过程中，解耦的过程中，就会衍生出很多的工具。在进化过程里我们也会去思考，哪些工作是需要工具化的，主动去开发工具。一个完善的工具集，会极大提升团队的生产力，可以说是最有价值的部分。    
