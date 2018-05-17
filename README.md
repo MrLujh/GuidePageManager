@@ -94,8 +94,10 @@ rm ~/Library/Caches/CocoaPods/search_index.json
 * 引入头文件 #import "GuidePageManager.h"
 
 * AppDelegate 遵守协议 <GuidePageDelegate>
-    
-```objc       
+
+* isShowBtnBackgroundColor:NO 传yes 会显示开始体验按钮的背景颜色，方便调整frame；
+
+```objc       
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     
