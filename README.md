@@ -16,14 +16,41 @@ rm ~/Library/Caches/CocoaPods/search_index.json
 * 一款App在首次安装后打开时，会有3-5页的介绍界面引导新用户使用或者给用户更新提示。
 根据引导页的目的、出发点不同，可以将其分为功能介绍类、使用说明类、推广类、问题解决类，一般引导页不会超过5页。 功能介绍类 功能介绍类引导页主要是对产品的主要功能进行展示，让用户对产品主功能有一个大致的了解。
 
-## 架构怎么进化
+## 创建方式
 
-* 架构进化体现在哪些方面，作为一个技术团队我们要如何把架构进化落地？这个问题因项目而异，因团队而异，因方向而异。本文只介绍手机天猫在发展过程中，与解耦相关的进化历程。
+* 有两种思路
 
-* 升级开发模式
-
-    * 开发模式的概念有点大，本文就只讨论和解耦这件事相关的：团队合作方式和工程组织形式。下文单独一节聊这个事，此处不赘述。
+    * 1.通过版本号来判断是否第一次安装,来改变窗口的根控制器,代码如下
     
+```objc       
+// 获取当前的版本号
+    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
+    
+    // 获取上一次的版本号
+    NSString *lastVersion = [[NSUserDefaults standardUserDefaults] objectForKey:THVersionKey];
+    
+    if ([lastVersion floatValue] > 0) {
+        
+        [[UIApplication sharedApplication] setStatusBarHidden:NO];
+        
+        // 没有最新的版本号 创建tabBarVc
+        TLTabBarViewController *tabBarVC = [[TLTabBarViewController alloc]init];
+        self.tabBarVC = tabBarVC;
+        [self showUnreadMessageHotView];
+        self.window.rootViewController = tabBarVC;
+        
+    }else {
+        
+      
+        TLGuidePageVC *vc = [[TLGuidePageVC alloc] init];
+
+        self.window.rootViewController = vc;
+
+        [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:THVersionKey];
+        
+    }
+```    
+    
 * 各维度解耦
 
     * 工程大了以后，要分拆，不管是组件化还是插件化，还是什么，解耦是第一步，而且是各个维度的解耦。
