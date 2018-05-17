@@ -18,7 +18,7 @@ rm ~/Library/Caches/CocoaPods/search_index.json
 
 ## 创建方式 ----有两种思路
 
-* 通过版本号来判断是否第一次安装,来改变窗口的根控制器,代码如下:
+* 通过版本号来判断是否第一次安装,self.window.rootViewController,来改变窗口的根控制器,代码如下:
     
 ```objc       
 // 获取当前的版本号
